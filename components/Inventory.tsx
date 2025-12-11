@@ -8,7 +8,9 @@ interface InventoryProps {
 }
 
 const Inventory: React.FC<InventoryProps> = ({ player, setPlayer }) => {
+  // Calculate derived stats
   const attackPower = (player.equipped.weapon?.value || 0) + 1; // Base damage 1 for unarmed
+  const defensePower = (player.equipped.armor?.value || 0); // Base defense 0
 
   const handleItemClick = (item: Item) => {
     if (item.type === ItemType.WEAPON) {
@@ -78,7 +80,8 @@ const Inventory: React.FC<InventoryProps> = ({ player, setPlayer }) => {
       </div>
 
       {/* Stats */}
-      <div className="p-4 grid grid-cols-2 gap-4 border-b border-slate-700 bg-slate-800/50">
+      <div className="p-4 border-b border-slate-700 bg-slate-800/50 space-y-4">
+        {/* Health Row */}
         <div className="flex flex-col">
           <span className="text-xs text-slate-400 uppercase">Hälsa</span>
           <div className="flex items-center gap-1 text-red-400 font-bold text-lg">
@@ -92,11 +95,22 @@ const Inventory: React.FC<InventoryProps> = ({ player, setPlayer }) => {
             ></div>
           </div>
         </div>
-        <div className="flex flex-col">
-          <span className="text-xs text-slate-400 uppercase">Anfallskraft</span>
-          <div className="flex items-center gap-1 text-yellow-400 font-bold text-lg">
-             <Zap className="w-4 h-4 fill-current" />
-             {attackPower}
+
+        {/* Combat Stats Grid */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col">
+            <span className="text-xs text-slate-400 uppercase">Anfallskraft</span>
+            <div className="flex items-center gap-1 text-yellow-400 font-bold text-lg">
+              <Zap className="w-4 h-4 fill-current" />
+              {attackPower}
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xs text-slate-400 uppercase">Skydd</span>
+            <div className="flex items-center gap-1 text-blue-400 font-bold text-lg">
+              <Shield className="w-4 h-4 fill-current" />
+              {defensePower}
+            </div>
           </div>
         </div>
       </div>
@@ -105,6 +119,7 @@ const Inventory: React.FC<InventoryProps> = ({ player, setPlayer }) => {
       <div className="p-4 space-y-3">
         <h3 className="text-xs uppercase text-slate-500 font-bold tracking-wider">Utrustad</h3>
         
+        {/* Weapon Slot */}
         <div className="flex items-center gap-3 p-2 bg-slate-900 rounded border border-slate-700 relative group">
           <div className="w-10 h-10 bg-slate-800 rounded flex items-center justify-center text-slate-500">
             <Sword className="w-5 h-5" />
@@ -127,6 +142,7 @@ const Inventory: React.FC<InventoryProps> = ({ player, setPlayer }) => {
           )}
         </div>
 
+        {/* Armor Slot */}
         <div className="flex items-center gap-3 p-2 bg-slate-900 rounded border border-slate-700 relative group">
           <div className="w-10 h-10 bg-slate-800 rounded flex items-center justify-center text-slate-500">
             <Shield className="w-5 h-5" />

@@ -1,11 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY;
-let ai: GoogleGenAI | null = null;
-
-if (apiKey) {
-  ai = new GoogleGenAI({ apiKey });
-}
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const enhanceNarrative = async (
   baseText: string,
@@ -13,8 +8,6 @@ export const enhanceNarrative = async (
   rollResult: number,
   success: boolean
 ): Promise<string> => {
-  if (!ai) return baseText;
-
   try {
     const prompt = `
       You are a Dungeon Master for a Sci-Fi RPG. 
@@ -40,7 +33,6 @@ export const enhanceNarrative = async (
 };
 
 export const generateAdminSummary = async (nodeJson: string): Promise<string> => {
-    if (!ai) return "AI Summary Unavailable";
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
