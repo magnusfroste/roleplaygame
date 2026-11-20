@@ -6,6 +6,8 @@ Gemini) skriver hur just ditt val gick.
 
 **Spela:** https://starlight-odyssey-rpg-616316980220.us-west1.run.app · En del av [Skolappar](https://www.skolappar.com) – pedagogiska appar av föräldrar · öppen källkod (MIT)
 
+![Role Play Game](docs/skarmbild.png)
+
 Appen är byggd i Google AI Studio och körs på Google Cloud Run. Den är ännu inte flyttad till
 Skolappars egen drift.
 
